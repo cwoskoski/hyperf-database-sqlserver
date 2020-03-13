@@ -21,7 +21,7 @@ class ConfigProvider
     {
         return [
             'dependencies' => [
-                'db.connector.pgsql' => SqlsvrConnector::class,
+                'db.connector.sqlsvr' => SqlsvrConnector::class,
             ],
             'listeners' => [
                 RegisterConnectionListener::class
