@@ -10,8 +10,10 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Postgres\Query\Processors;
+namespace Hyperf\Database\Sqlsvr\Query\Processors;
 
+use Hyperf\Database\Connection;
+use Hyperf\Database\Query\Builder;
 use Hyperf\Database\Query\Processors\Processor;
 
 class SqlsvrProcessor extends Processor
@@ -19,11 +21,12 @@ class SqlsvrProcessor extends Processor
     /**
      * Process an "insert get ID" query.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     * @param  string  $sql
-     * @param  array  $values
-     * @param  string|null  $sequence
+     * @param Builder $query
+     * @param string $sql
+     * @param array $values
+     * @param string|null $sequence
      * @return int
+     * @throws \Exception
      */
     public function processInsertGetId(Builder $query, $sql, $values, $sequence = null)
     {
@@ -43,10 +46,9 @@ class SqlsvrProcessor extends Processor
     /**
      * Process an "insert get ID" query for ODBC.
      *
-     * @param  \Illuminate\Database\Connection  $connection
+     * @param Connection $connection
      * @return int
      *
-     * @throws \Exception
      */
     protected function processInsertGetIdForOdbc(Connection $connection)
     {

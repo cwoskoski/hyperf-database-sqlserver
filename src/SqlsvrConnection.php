@@ -10,9 +10,9 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Postgres;
+namespace Hyperf\Database\Sqlsvr;
 
-use Doctrine\DBAL\Driver\PDOPgSql\Driver as DoctrineDriver;
+use Doctrine\DBAL\Driver\PDOSqlsrv\Driver as DoctrineDriver;
 use Hyperf\Database\Connection;
 use Hyperf\Database\Sqlsvr\Query\Processors\SqlsvrProcessor as SqlsvrQueryProcessor;
 use Hyperf\Database\Sqlsvr\Schema\Grammars\SqlsvrGrammar as SqlsvrSchemaGrammar;
@@ -31,7 +31,7 @@ class SqlsvrConnection extends Connection
      *
      * @throws \Exception|\Throwable
      */
-    public function transaction(Closure $callback, $attempts = 1)
+    public function transaction(\Closure $callback, $attempts = 1)
     {
         for ($a = 1; $a <= $attempts; $a++) {
             if ($this->getDriverName() === 'sqlsrv') {
@@ -69,7 +69,7 @@ class SqlsvrConnection extends Connection
     /**
      * Get the default query grammar instance.
      *
-     * @return \Illuminate\Database\Query\Grammars\SqlServerGrammar
+     * @return SqlsvrQueryGrammar
      */
     protected function getDefaultQueryGrammar()
     {
@@ -79,35 +79,35 @@ class SqlsvrConnection extends Connection
     /**
      * Get a schema builder instance for the connection.
      *
-     * @return \Illuminate\Database\Schema\SqlServerBuilder
+     * @return SqlsvrSchemaBuilder
      */
     public function getSchemaBuilder()
     {
-        if (is_null($this->schemaGrammar)) {
+        if ($this->schemaGrammar === null) {
             $this->useDefaultSchemaGrammar();
         }
 
-        return new SqlServerBuilder($this);
+        return new SqlsvrSchemaBuilder($this);
     }
 
     /**
      * Get the default schema grammar instance.
      *
-     * @return \Illuminate\Database\Schema\Grammars\SqlServerGrammar
+     * @return SqlsvrSchemaGrammar
      */
     protected function getDefaultSchemaGrammar()
     {
-        return $this->withTablePrefix(new SchemaGrammar);
+        return $this->withTablePrefix(new SqlsvrSchemaGrammar);
     }
 
     /**
      * Get the default post processor instance.
      *
-     * @return \Illuminate\Database\Query\Processors\SqlServerProcessor
+     * @return SqlsvrQueryProcessor
      */
     protected function getDefaultPostProcessor()
     {
-        return new SqlServerProcessor;
+        return new SqlsvrQueryProcessor;
     }
 
     /**

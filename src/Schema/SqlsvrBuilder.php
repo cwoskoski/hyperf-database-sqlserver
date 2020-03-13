@@ -10,9 +10,8 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Postgres\Schema;
+namespace Hyperf\Database\Sqlsvr\Schema;
 
-use Hyperf\Database\Postgres\Query\Processors\PostgresProcessor;
 use Hyperf\Database\Schema\Builder;
 
 class SqlsvrBuilder extends Builder

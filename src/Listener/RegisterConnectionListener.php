@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Hyperf\Database\Postgres\Listener;
+namespace Hyperf\Database\Sqlsvr\Listener;
 
 use Hyperf\Contract\ContainerInterface;
+use Hyperf\Database\Sqlsvr\SqlsvrConnection;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\BootApplication;
 

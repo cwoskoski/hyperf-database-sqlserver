@@ -10,10 +10,10 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Postgres;
+namespace Hyperf\Database\Sqlsvr;
 
-use Hyperf\Database\Postgres\Connectors\PostgresConnector;
-use Hyperf\Database\Postgres\Listener\RegisterConnectionListener;
+use Hyperf\Database\Sqlsvr\Connectors\SqlsvrConnector;
+use Hyperf\Database\Sqlsvr\Listener\RegisterConnectionListener;
 
 class ConfigProvider
 {
@@ -22,7 +22,7 @@ class ConfigProvider
         var_dump(__METHOD__);
         return [
             'dependencies' => [
-                'db.connector.pgsql' => PostgresConnector::class,
+                'db.connector.pgsql' => SqlsvrConnector::class,
             ],
             'listeners' => [
                 RegisterConnectionListener::class

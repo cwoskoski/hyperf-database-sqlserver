@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Postgres\Query\Grammars;
+namespace Hyperf\Database\Sqlsvr\Query\Grammars;
 
 use Hyperf\Database\Query\Grammars\Grammar as QueryGrammar;
 use Hyperf\Database\Query\Builder;
@@ -32,7 +32,7 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile a select query into SQL.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param Builder $query
      * @return string
      */
     public function compileSelect(Builder $query)
@@ -81,8 +81,8 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile the "from" portion of the query.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     * @param  string  $table
+     * @param Builder $query
+     * @param string $table
      * @return string
      */
     protected function compileFrom(Builder $query, $table)
@@ -103,8 +103,8 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile a "where date" clause.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     * @param  array  $where
+     * @param Builder $query
+     * @param array $where
      * @return string
      */
     protected function whereDate(Builder $query, $where)
@@ -117,8 +117,8 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile a "where time" clause.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     * @param  array  $where
+     * @param Builder $query
+     * @param array $where
      * @return string
      */
     protected function whereTime(Builder $query, $where)
@@ -171,8 +171,8 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Create a full ANSI offset clause for the query.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     * @param  array  $components
+     * @param Builder $query
+     * @param array $components
      * @return string
      */
     protected function compileAnsiOffset(Builder $query, $components)
@@ -214,7 +214,7 @@ class SqlsvrGrammar extends QueryGrammar
      * Compile a common table expression for a query.
      *
      * @param  string  $sql
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  \Hyperf\Database\Query\Builder  $query
      * @return string
      */
     protected function compileTableExpression($sql, $query)
@@ -227,7 +227,7 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile the limit / offset row constraint for a query.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  \Hyperf\Database\Query\Builder  $query
      * @return string
      */
     protected function compileRowConstraint($query)
@@ -257,7 +257,7 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile the "limit" portions of the query.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  \Hyperf\Database\Query\Builder  $query
      * @param  int  $limit
      * @return string
      */
@@ -269,7 +269,7 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile the "offset" portions of the query.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  \Hyperf\Database\Query\Builder  $query
      * @param  int  $offset
      * @return string
      */
@@ -281,7 +281,7 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile the lock into SQL.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  \Hyperf\Database\Query\Builder  $query
      * @param  bool|string  $value
      * @return string
      */
@@ -304,7 +304,7 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile an exists statement into SQL.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  \Hyperf\Database\Query\Builder  $query
      * @return string
      */
     public function compileExists(Builder $query)
@@ -319,7 +319,7 @@ class SqlsvrGrammar extends QueryGrammar
     /**
      * Compile an update statement with joins into SQL.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  \Hyperf\Database\Query\Builder  $query
      * @param  string  $table
      * @param  string  $columns
      * @param  string  $where
