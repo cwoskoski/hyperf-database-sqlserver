@@ -19,7 +19,6 @@ class ConfigProvider
 {
     public function __invoke(): array
     {
-        var_dump(__METHOD__);
         return [
             'dependencies' => [
                 'db.connector.pgsql' => SqlsvrConnector::class,
