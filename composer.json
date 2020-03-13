@@ -1,0 +1,46 @@
+{
+  "name": "chadw/hyperf-database-postgres",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "hyperf"
+  ],
+  "description": "Add Postgres support to Hyperf",
+  "autoload": {
+    "psr-4": {
+      "Hyperf\\Database\\Sqlsvr\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HyperfTest\\Sqlsvr\\": "tests"
+    }
+  },
+  "require": {
+    "php": ">=7.2",
+    "ext-pdo": "*",
+    "ext-swoole": ">=4.4",
+    "hyperf/database": "^1.1",
+    "hyperf/di": "1.1.*"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.14",
+    "hyperf/testing": "1.1.*",
+    "mockery/mockery": "^1.3",
+    "phpstan/phpstan": "^0.10.5",
+    "swoft/swoole-ide-helper": "dev-master"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "scripts": {
+    "test": "co-phpunit -c phpunit.xml --colors=always",
+    "analyse": "phpstan analyse --memory-limit 300M -l 0 ./src",
+    "cs-fix": "php-cs-fixer fix $1"
+  },
+  "extra": {
+    "hyperf": {
+      "config": "Hyperf\\Database\\Sqlsvr\\ConfigProvider"
+    }
+  }
+}
