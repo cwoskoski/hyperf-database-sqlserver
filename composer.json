@@ -1,11 +1,11 @@
 {
-  "name": "chadw/hyperf-database-postgres",
+  "name": "chadw/hyperf-database-sqlsvr",
   "license": "MIT",
   "keywords": [
     "php",
     "hyperf"
   ],
-  "description": "Add Postgres support to Hyperf",
+  "description": "Add Sql Server support to Hyperf",
   "autoload": {
     "psr-4": {
       "Hyperf\\Database\\Sqlsvr\\": "src/"
