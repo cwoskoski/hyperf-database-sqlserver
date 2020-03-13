@@ -22,7 +22,6 @@ final class RegisterConnectionListener implements ListenerInterface
 
     public function listen(): array
     {
-        var_dump(__METHOD__);
         return [
             BootApplication::class,
         ];
@@ -30,7 +29,6 @@ final class RegisterConnectionListener implements ListenerInterface
 
     public function process(object $event)
     {
-        var_dump(__METHOD__);
         \Hyperf\Database\Connection::resolverFor('sqlsvr', function($connection, $database, $prefix, $config){
             return new SqlsvrConnection($connection, $database, $prefix, $config);
         });
