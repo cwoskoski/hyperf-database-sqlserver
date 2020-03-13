@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Hyperf\Database\Sqlsvr;
 
-use Hyperf\Database\Sqlsvr\Connectors\SqlsvrConnector;
+use Hyperf\Database\Sqlsvr\Connectors\SqlServerConnector;
 use Hyperf\Database\Sqlsvr\Listener\RegisterConnectionListener;
 
 class ConfigProvider
@@ -21,7 +21,7 @@ class ConfigProvider
     {
         return [
             'dependencies' => [
-                'db.connector.sqlsvr' => SqlsvrConnector::class,
+                'db.connector.sqlsrv' => SqlServerConnector::class,
             ],
             'listeners' => [
                 RegisterConnectionListener::class

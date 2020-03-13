@@ -1,5 +1,5 @@
-# Hyperf Database Sqlsvr
+# Hyperf Database SqlServer
 
 ```
-composer requite chadw/hyperf-database-sqlsvr
+composer requite chadw/hyperf-database-sqlserver
 ```
