@@ -40,7 +40,7 @@
   },
   "extra": {
     "hyperf": {
-      "config": "Hyperf\\Database\\Sqlsvr\\ConfigProvider"
+      "config": "Hyperf\\Database\\Sqlsrv\\ConfigProvider"
     }
   }
 }
