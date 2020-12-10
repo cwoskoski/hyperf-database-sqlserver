@@ -8,12 +8,12 @@
   "description": "Add Sql Server support to Hyperf",
   "autoload": {
     "psr-4": {
-      "Hyperf\\Database\\Sqlsvr\\": "src/"
+      "Hyperf\\Database\\Sqlsrv\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "HyperfTest\\Sqlsvr\\": "tests"
+      "HyperfTest\\Sqlsrv\\": "tests"
     }
   },
   "require": {

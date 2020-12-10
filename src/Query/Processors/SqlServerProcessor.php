@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Sqlsvr\Query\Processors;
+namespace Hyperf\Database\Sqlsrv\Query\Processors;
 
 use Hyperf\Database\Connection;
 use Hyperf\Database\Query\Builder;

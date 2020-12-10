@@ -10,10 +10,10 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Sqlsvr;
+namespace Hyperf\Database\Sqlsrv;
 
-use Hyperf\Database\Sqlsvr\Connectors\SqlServerConnector;
-use Hyperf\Database\Sqlsvr\Listener\RegisterConnectionListener;
+use Hyperf\Database\Sqlsrv\Connectors\SqlServerConnector;
+use Hyperf\Database\Sqlsrv\Listener\RegisterConnectionListener;
 
 class ConfigProvider
 {

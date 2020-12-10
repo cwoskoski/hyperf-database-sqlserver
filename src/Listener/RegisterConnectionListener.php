@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Hyperf\Database\Sqlsvr\Listener;
+namespace Hyperf\Database\Sqlsrv\Listener;
 
 use Hyperf\Contract\ContainerInterface;
-use Hyperf\Database\Sqlsvr\SqlServerConnection;
+use Hyperf\Database\Sqlsrv\SqlServerConnection;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\BootApplication;
 

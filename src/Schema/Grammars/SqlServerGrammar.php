@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Sqlsvr\Schema\Grammars;
+namespace Hyperf\Database\Sqlsrv\Schema\Grammars;
 
 use Hyperf\Database\Connection;
 use Hyperf\Database\Schema\Blueprint;

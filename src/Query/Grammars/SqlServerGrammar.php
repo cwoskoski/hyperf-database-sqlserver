@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Sqlsvr\Query\Grammars;
+namespace Hyperf\Database\Sqlsrv\Query\Grammars;
 
 use Hyperf\Database\Query\Grammars\Grammar as QueryGrammar;
 use Hyperf\Database\Query\Builder;

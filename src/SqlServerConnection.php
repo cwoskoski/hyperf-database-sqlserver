@@ -10,14 +10,14 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Sqlsvr;
+namespace Hyperf\Database\Sqlsrv;
 
 use Doctrine\DBAL\Driver\PDOSqlsrv\Driver as DoctrineDriver;
 use Hyperf\Database\Connection;
-use Hyperf\Database\Sqlsvr\Query\Processors\SqlServerProcessor as SqlsvrQueryProcessor;
-use Hyperf\Database\Sqlsvr\Schema\Grammars\SqlServerGrammar as SqlsvrSchemaGrammar;
-use Hyperf\Database\Sqlsvr\Query\Grammars\SqlServerGrammar as SqlsvrQueryGrammar;
-use Hyperf\Database\Sqlsvr\Schema\SqlServerBuilder as SqlsvrSchemaBuilder;
+use Hyperf\Database\Sqlsrv\Query\Processors\SqlServerProcessor as SqlsvrQueryProcessor;
+use Hyperf\Database\Sqlsrv\Schema\Grammars\SqlServerGrammar as SqlsvrSchemaGrammar;
+use Hyperf\Database\Sqlsrv\Query\Grammars\SqlServerGrammar as SqlsvrQueryGrammar;
+use Hyperf\Database\Sqlsrv\Schema\SqlServerBuilder as SqlsvrSchemaBuilder;
 use PDO;
 
 class SqlServerConnection extends Connection

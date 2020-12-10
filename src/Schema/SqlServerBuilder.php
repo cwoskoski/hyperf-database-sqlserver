@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Hyperf\Database\Sqlsvr\Schema;
+namespace Hyperf\Database\Sqlsrv\Schema;
 
 use Hyperf\Database\Schema\Builder;
 
