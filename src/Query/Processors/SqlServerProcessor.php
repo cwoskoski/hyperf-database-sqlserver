@@ -71,7 +71,7 @@ class SqlServerProcessor extends Processor
      * @param  array  $results
      * @return array
      */
-    public function processColumnListing($results)
+    public function processColumnListing(array $results): array
     {
         return array_map(function ($result) {
             return ((object) $result)->name;
