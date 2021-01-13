@@ -2,3 +2,8 @@
 /.idea export-ignore
 /docker export-ignore
 /docker-compose.yml export-ignore
+/example export-ignore
+/.phpstorm.meta.php export-ignore
+/.travis export-ignore
+/phpunit.xml export-ignore
+/.php_cs export-ignore
