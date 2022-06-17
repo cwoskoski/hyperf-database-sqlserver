@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace CVTrust\SutterHealthAetna\Eligibility;
+namespace Hyperf\Database\Sqlsvr;
 
 use Hyperf\Database\Postgres\Connectors\PostgresConnector;
 use Hyperf\Database\Postgres\PostgresConnection;
@@ -29,8 +29,8 @@ require 'vendor/autoload.php';
         'host' => 'db',
         'port' => 1433,
         'database' => 'master',
-        'username' => 'sa',
-        'password' => 'KJbw4XfvT@M-_VWR'
+        'username' => env('db_user'),
+        'password' => env('db_password')
     ];
 
     $now = microtime(true);
