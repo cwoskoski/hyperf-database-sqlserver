@@ -1,12 +1,6 @@
-FROM php:7.4-zts-buster
+FROM php:8.2-zts-bookworm
 
-ENV SWOOLE_VERSION=4.5.9
-
-RUN set -xe && \
-    apt-get update && \
-    apt-get install -y $PHPIZE_DEPS libpq-dev netcat-traditional git openssl libssl-dev libcurl4-openssl-dev autoconf libzip-dev && \
-    docker-php-ext-install sockets exif zip pdo_pgsql && \
-    docker-php-ext-enable sockets exif zip pdo_pgsql
+ENV SWOOLE_VERSION=5.1.2
 
 # persistent / runtime deps
 ENV PHPIZE_DEPS \
@@ -17,13 +11,13 @@ ENV PHPIZE_DEPS \
     gcc \
     libc-dev \
     make \
+    git \
     re2c
 
 ENV ACCEPT_EULA=Y
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends $PHPIZE_DEPS \
-        libgpgme11-dev \
         gnupg2 \
         libcurl4 \
         wget \
@@ -33,9 +27,27 @@ RUN apt-get update \
         libldap2-dev \
         locales \
         apt-transport-https \
-        git \
     && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen
+
+RUN docker-php-ext-install \
+            ldap \
+            pcntl \
+            bcmath \
+            zip
+
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+      && curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+      && apt-get update -yqq \
+      # Install Dependencies
+      && ACCEPT_EULA=Y apt-get install -y libssl-dev unixodbc unixodbc-dev libgss3 odbcinst msodbcsql17 \
+      && pecl install sqlsrv-5.12.0 \
+      && pecl install pdo_sqlsrv-5.12.0 \
+      && docker-php-ext-enable pdo_sqlsrv sqlsrv \
+      && php -m | grep -q 'pdo_sqlsrv' \
+      && php -m | grep -q 'sqlsrv'
+
+COPY openssl.cnf /etc/ssl/openssl.cnf
 
 RUN set -xe && \
     curl -LO https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz && \
@@ -48,17 +60,6 @@ RUN set -xe && \
         make install && \
     cd ../.. && rm -rf v${SWOOLE_VERSION}.tar.gz swoole-src-${SWOOLE_VERSION} && \
     docker-php-ext-enable swoole
-
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-      && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-      && apt-get update -yqq \
-      # Install Dependencies
-      && ACCEPT_EULA=Y apt-get install -y libssl-dev unixodbc unixodbc-dev libgss3 odbcinst msodbcsql17 \
-      && pecl install pdo_sqlsrv sqlsrv \
-      && docker-php-ext-enable pdo_sqlsrv sqlsrv \
-      && sed -i -E 's/(CipherString\s*=\s*DEFAULT@SECLEVEL=)2/\11/' /etc/ssl/openssl.cnf \
-      && php -m | grep -q 'pdo_sqlsrv' \
-      && php -m | grep -q 'sqlsrv'
 
 RUN set -xe && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

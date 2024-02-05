@@ -3,12 +3,17 @@ declare(strict_types=1);
 
 namespace Hyperf\Database\Sqlsvr\Listener;
 
-use Hyperf\Contract\ContainerInterface;
+// use Hyperf\Contract\ContainerInterface;
 use Hyperf\Database\Sqlsvr\SqlServerConnection;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\BootApplication;
 
-final class RegisterConnectionListener implements ListenerInterface
+
+use Hyperf\Database\Connection;
+// use Hyperf\Event\Contract\ListenerInterface;
+// use Hyperf\Framework\Event\BootApplication;
+use Psr\Container\ContainerInterface;
+final class RegisterConnectionListener// implements ListenerInterface
 {
     /**
      * @var ContainerInterface

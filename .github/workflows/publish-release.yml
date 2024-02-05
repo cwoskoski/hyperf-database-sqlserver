@@ -1,0 +1,40 @@
+name: Release to custom Composer repository
+
+on:
+  push:
+    tags:
+      - 'ffffv*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub automatically creates a `GITHUB_TOKEN` secret to use in your workflow.
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Publish to custom composer repository
+        run: |
+          composer config http-basic.kscompose.tvps.kitsysco.com token ${{ secrets.CUSTOM_COMPOSER_API_TOKEN }}
+          composer publish
+        env:
+          CUSTOM_COMPOSER_API_TOKEN: ${{ secrets.CUSTOM_COMPOSER_API_TOKEN }}

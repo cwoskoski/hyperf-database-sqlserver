@@ -10,12 +10,14 @@
 
 declare(strict_types=1);
 
-namespace CVTrust\SutterHealthAetna\Eligibility;
+namespace Hyperf\Database\Sqlsvr;
 
-use Hyperf\Database\Postgres\Connectors\PostgresConnector;
-use Hyperf\Database\Postgres\PostgresConnection;
+use Hyperf\Coroutine\WaitGroup;
+use Hyperf\Database\Sqlsvr\SqlServerConnection;
 use Hyperf\Database\Sqlsvr\Connectors\SqlServerConnector;
 use Swoole\Event;
+use function Hyperf\Coroutine\go;
+use function Hyperf\Support\env;
 
 \error_reporting(E_ALL & ~E_NOTICE);
 \chdir(\dirname(__DIR__));
@@ -24,16 +26,16 @@ require 'vendor/autoload.php';
 
 \Swoole\Runtime::enableCoroutine();
 
-\Swoole\Coroutine\run(function () {
+$now = microtime(true);
+
+\Swoole\Coroutine\run(function() use ($now) {
     $config = [
         'host' => 'db',
         'port' => 1433,
         'database' => 'master',
         'username' => 'sa',
-        'password' => 'KJbw4XfvT@M-_VWR'
+        'password' => 'BdTAekTAdR7cbvpu'
     ];
-
-    $now = microtime(true);
 
     go(function() use($config) {
         $now = microtime(true);
@@ -53,5 +55,7 @@ require 'vendor/autoload.php';
 
     var_dump(microtime(true) - $now);
 });
+
+var_dump(microtime(true) - $now);
 
 Event::wait();

@@ -31,51 +31,56 @@ class SqlServerGrammar extends QueryGrammar
 
     /**
      * Compile a select query into SQL.
-     *
-     * @param Builder $query
-     * @return string
      */
-    public function compileSelect(Builder $query)
+    public function compileSelect(Builder $query): string
     {
-        if (! $query->offset) {
-            return parent::compileSelect($query);
+        if ($query->unions && $query->aggregate) {
+            return $this->compileUnionAggregate($query);
         }
 
-        // If an offset is present on the query, we will need to wrap the query in
-        // a big "ANSI" offset syntax block. This is very nasty compared to the
-        // other database systems but is necessary for implementing features.
+        // If the query does not have any columns set, we'll set the columns to the
+        // * character to just get all of the columns from the database. Then we
+        // can build the query and concatenate all the pieces together as one.
+        $original = $query->columns;
+
         if (is_null($query->columns)) {
             $query->columns = ['*'];
         }
 
-        return $this->compileAnsiOffset(
-            $query, $this->compileComponents($query)
+        // To compile the query, we'll spin through each component of the query and
+        // see if that component exists. If it does we'll just call the compiler
+        // function for the component which is responsible for making the SQL.
+        $sql = trim(
+            $this->concatenate(
+                $this->compileComponents($query)
+            )
         );
+
+        $query->columns = $original;
+
+        return $sql;
     }
 
     /**
      * Compile the "select *" portion of the query.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     * @param  array  $columns
-     * @return string|null
+     * @param array $columns
      */
-    protected function compileColumns(Builder $query, $columns)
+    protected function compileColumns(Builder $query, $columns): ?string
     {
+        // If the query is actually performing an aggregating select, we will let that
+        // compiler handle the building of the select clauses, as it will need some
+        // more syntax that is best handled by that function to keep things neat.
         if (! is_null($query->aggregate)) {
-            return;
+            return null;
         }
 
         $select = $query->distinct ? 'select distinct ' : 'select ';
-
-        // If there is a limit on the query, but not an offset, we will add the top
-        // clause to the query, which serves as a "limit" type clause within the
-        // SQL Server system similar to the limit keywords available in MySQL.
         if ($query->limit > 0 && $query->offset <= 0) {
             $select .= 'top '.$query->limit.' ';
         }
 
-        return $select.$this->columnize($columns);
+        return $select . $this->columnize($columns);
     }
 
     /**
