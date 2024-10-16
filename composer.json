@@ -1,5 +1,5 @@
 {
-    "name": "cvtrust/hyperf-database-sqlserver",
+    "name": "chadw/hyperf-database-sqlserver",
     "type": "library",
     "license": "MIT",
     "keywords": [
