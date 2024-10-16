@@ -12,10 +12,10 @@ declare(strict_types=1);
 
 namespace Hyperf\Database\Sqlsvr;
 
-use Hyperf\Database\Postgres\Connectors\PostgresConnector;
-use Hyperf\Database\Postgres\PostgresConnection;
-use Hyperf\Database\Sqlsvr\Connectors\SqlServerConnector;
+use Hyperf\Database\Sqlsrv\Connectors\SqlServerConnector;
 use Swoole\Event;
+use function Hyperf\Support\env;
+use function Hyperf\Coroutine\go;
 
 \error_reporting(E_ALL & ~E_NOTICE);
 \chdir(\dirname(__DIR__));

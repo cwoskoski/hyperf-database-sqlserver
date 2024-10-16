@@ -1,27 +1,35 @@
 <?php
 
-declare(strict_types=1);
-/**
- * This file is part of Hyperf.
- *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
- */
-
-namespace Hyperf\Database\Sqlsvr\Schema;
+namespace Hyperf\Database\Sqlsrv\Schema;
 
 use Hyperf\Database\Schema\Builder;
 
 class SqlServerBuilder extends Builder
 {
     /**
-     * Drop all tables from the database.
-     *
-     * @return void
+     * Create a database in the schema.
      */
-    public function dropAllTables()
+    public function createDatabase(string $name): bool
+    {
+        return $this->connection->statement(
+            $this->grammar->compileCreateDatabase($name, $this->connection)
+        );
+    }
+
+    /**
+     * Drop a database from the schema if the database exists.
+     */
+    public function dropDatabaseIfExists(string $name): bool
+    {
+        return $this->connection->statement(
+            $this->grammar->compileDropDatabaseIfExists($name)
+        );
+    }
+
+    /**
+     * Drop all tables from the database.
+     */
+    public function dropAllTables(): void
     {
         $this->connection->statement($this->grammar->compileDropAllForeignKeys());
 
@@ -30,11 +38,29 @@ class SqlServerBuilder extends Builder
 
     /**
      * Drop all views from the database.
-     *
-     * @return void
      */
-    public function dropAllViews()
+    public function dropAllViews(): void
     {
         $this->connection->statement($this->grammar->compileDropAllViews());
+    }
+
+    /**
+     * Drop all tables from the database.
+     */
+    public function getAllTables(): array
+    {
+        return $this->connection->select(
+            $this->grammar->compileGetAllTables()
+        );
+    }
+
+    /**
+     * Get all of the view names for the database.
+     */
+    public function getAllViews(): array
+    {
+        return $this->connection->select(
+            $this->grammar->compileGetAllViews()
+        );
     }
 }

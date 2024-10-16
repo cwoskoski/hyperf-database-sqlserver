@@ -1,48 +1,54 @@
 {
-  "name": "mq321/hyperf-database-sqlserver",
-  "license": "MIT",
-  "keywords": [
-    "php",
-    "hyperf"
-  ],
-  "description": "Add Sql Server support to Hyperf",
-  "autoload": {
-    "psr-4": {
-      "Hyperf\\Database\\Sqlsvr\\": "src/"
+    "name": "cvtrust/hyperf-database-sqlserver",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "hyperf",
+        "SqlServer"
+    ],
+    "authors": [
+        {
+            "name": "Chance",
+            "email": "chance.fyii@gmail.com"
+        }
+    ],
+    "description": "Add SqlServer support to Hyperf",
+    "autoload": {
+        "psr-4": {
+            "Hyperf\\Database\\Sqlsrv\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.3",
+        "ext-pdo": "*",
+        "hyperf/db-connection": "~3.1.0",
+        "hyperf/task": "~3.1.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "hyperf/config": "~3.1.0",
+        "hyperf/support": "~3.1.0",
+        "mockery/mockery": "^1.0",
+        "phpstan/phpstan": "^1.0",
+        "swoole/ide-helper": "^5.0"
+    },
+    "suggest": {
+        "swow/swow": "Required to create swow components."
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "analyse": "phpstan analyse --memory-limit 1024M -l 0 ./src",
+        "cs-fix": "php-cs-fixer fix $1"
+    },
+    "extra": {
+        "hyperf": {
+            "config": "Chance\\Hyperf\\Database\\Sqlsrv\\ConfigProvider"
+        }
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "HyperfTest\\Sqlsvr\\": "tests"
-    }
-  },
-  "require": {
-    "php": ">=8.1",
-    "ext-pdo": "*",
-    "hyperf/database": "~3.0.0",
-    
-    "ext-swoole": ">=5.0",
-    "hyperf/collection": "~3.0.0",
-    "hyperf/support": "~3.0.0",
-    "hyperf/tappable": "~3.0.0"
-  },
-  "require-dev": {
-    "malukenho/docheader": "^0.1.6",
-    "mockery/mockery": "^1.0",
-    "phpunit/phpunit": "^9.4",
-    "swoole/ide-helper": "^5.0"
-  },
-  "config": {
-    "sort-packages": true
-  },
-  "scripts": {
-    "test": "phpunit -c phpunit.xml --colors=always",
-    "analyse": "phpstan analyse --memory-limit 300M -l 0 ./src",
-    "cs-fix": "php-cs-fixer fix $1"
-  },
-  "extra": {
-    "hyperf": {
-      "config": "Hyperf\\Database\\Sqlsvr\\ConfigProvider"
-    }
-  }
 }

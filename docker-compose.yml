@@ -10,6 +10,15 @@ services:
     depends_on:
       - db
 
+  connect:
+    build:
+      context: ./docker/php-cli
+    volumes:
+      - ./:/app
+    command: php example/connect.php
+    depends_on:
+      - db
+
   db:
     image: mcr.microsoft.com/mssql/server:2017-latest
     environment:

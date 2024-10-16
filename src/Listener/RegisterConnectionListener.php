@@ -1,29 +1,19 @@
 <?php
-declare(strict_types=1);
 
-namespace Hyperf\Database\Sqlsvr\Listener;
+namespace Hyperf\Database\Sqlsrv\Listener;
 
-// use Hyperf\Contract\ContainerInterface;
-use Hyperf\Database\Sqlsvr\SqlServerConnection;
+use Hyperf\Database\Sqlsrv\SqlServerConnection;
+use Hyperf\Database\Connection;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\BootApplication;
-
-
-use Hyperf\Database\Connection;
-// use Hyperf\Event\Contract\ListenerInterface;
-// use Hyperf\Framework\Event\BootApplication;
 use Psr\Container\ContainerInterface;
-final class RegisterConnectionListener// implements ListenerInterface
+
+class RegisterConnectionListener implements ListenerInterface
 {
     /**
-     * @var ContainerInterface
+     * Create a new connection factory instance.
      */
-    protected $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
+    public function __construct(protected ContainerInterface $container) {}
 
     public function listen(): array
     {
@@ -32,9 +22,12 @@ final class RegisterConnectionListener// implements ListenerInterface
         ];
     }
 
-    public function process(object $event)
+    /**
+     * register sqlserver need Connector and Connection.
+     */
+    public function process(object $event): void
     {
-        \Hyperf\Database\Connection::resolverFor('sqlsrv', function($connection, $database, $prefix, $config){
+        Connection::resolverFor('sqlsrv', static function ($connection, $database, $prefix, $config) {
             return new SqlServerConnection($connection, $database, $prefix, $config);
         });
     }

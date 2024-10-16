@@ -1,6 +1,6 @@
+/.idea
 /vendor/
-/.idea/
 composer.lock
 *.cache
 *.log
-.env
+/runtime/
