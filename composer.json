@@ -48,7 +48,7 @@
     },
     "extra": {
         "hyperf": {
-            "config": "Chance\\Hyperf\\Database\\Sqlsrv\\ConfigProvider"
+            "config": "Hyperf\\Database\\Sqlsrv\\ConfigProvider"
         }
     }
 }
